@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebApp_SqlProject.Models.User>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Display Users</h2>
+
+<table class="table">
+    <tr>
+        <th scope="col">Employee ID</th>
+        <th scope="col">Employee Email</th>
+        <th scope="col">Employee Password</th>
+        <th scope="col">Date Created</th>
+        <th scope="col">Date Created</th">
+    </tr>
+    @foreach (var user in Model)
+    {
+<tr>
+    <td scope="row">@user.UserId</td>
+    <td scope="row">@user.UserEmail</td>
+    <td scope="row">@user.UserPassword</td>
+    <td scope="row">@user.DateCreated</td>
+    <td scope="row">
+        @Html.ActionLink("Delete", "Delete", new { email = user.UserEmail })
+    </td>
+</tr>
+    }
+   
+</table>

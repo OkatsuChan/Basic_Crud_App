@@ -1,0 +1,26 @@
+﻿@model  WebApp_SqlProject.Models.User
+
+@{
+    ViewBag.Title = "Delete Page";
+}
+
+<div>
+    <h4>Person</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Email Selected</dt>
+        <dd>@Model.UserEmail</dd>
+        <!-- Display other properties as needed -->
+    </dl>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Read",null, new { @class="btn btn-secondary"})
+        </div>
+    }
+</div>
