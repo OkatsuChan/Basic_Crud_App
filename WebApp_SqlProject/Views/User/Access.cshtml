@@ -1,12 +1,12 @@
 ﻿@model WebApp_SqlProject.Models.User
 
 @{
-    ViewBag.Title = "Account Creation";
+    ViewBag.Title = "Login Page";
 }
 
-<h1>Account Creation Page</h1>
+<h1>Login Access Page</h1>
 
-@using (Html.BeginForm("Create","User", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -17,9 +17,15 @@
     </div>
     <div class="form-group">
         <label for="InputPassword">Password</label>
-        @Html.PasswordFor(model => model.UserPassword, new { @type = "password", @class = "form-control", @placeholder = "Enter Password" })
+        @Html.TextBoxFor(model => model.UserPassword, new { @type = "password", @class = "form-control", @placeholder = "Enter Password" })
         @Html.ValidationMessageFor(model => model.UserPassword)
     </div>
     <button type="submit" class="btn btn-primary">Sumbit</button>
 }
 
+@if (TempData["ErrorMessage"] != null)
+{
+    <script type="text/javascript">
+        alert("@TempData["ErrorMessage"]");
+    </script>
+}

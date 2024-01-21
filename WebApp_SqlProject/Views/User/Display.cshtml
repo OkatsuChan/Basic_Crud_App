@@ -22,7 +22,7 @@
             <td scope="row">@user.UserPassword</td>
             <td scope="row">@user.DateCreated</td>
             <td scope="row">
-                @using (Html.BeginForm("Delete", "User", new { id = user.UserId }, FormMethod.Post, new { onsubmit = $"return confirm('Are you sure you want to delete {user.UserEmail} this will be resulting on permanent deletion?');" }))
+                @using (Html.BeginForm("Delete", "User", new { id = user.UserId },FormMethod.Post, new { onsubmit = $"return confirm('Are you sure you want to delete {user.UserEmail} this will be resulting on permanent deletion?');" }))
                 {
                     @Html.AntiForgeryToken()
                     <input type="submit" value="Delete" class="btn btn-danger" />
@@ -40,3 +40,5 @@
 <div class="container">
     @Html.ActionLink("Create New Account", "Creation", "User", null, new { @class = "btn btn-info" })
 </div>
+
+

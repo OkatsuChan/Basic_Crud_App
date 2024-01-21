@@ -176,6 +176,7 @@
     <Content Include="Views\User\Creation.cshtml" />
     <Content Include="Views\User\Display.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Access.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

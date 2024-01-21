@@ -16,7 +16,7 @@ namespace WebApp_SqlProject
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "User", action = "Display", id = UrlParameter.Optional }
+                defaults: new { controller = "User", action = "Access", id = UrlParameter.Optional }
             );
         }
     }

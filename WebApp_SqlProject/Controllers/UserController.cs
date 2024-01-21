@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WebApp_SqlProject.Models;
 
 namespace WebApp_SqlProject.Controllers
@@ -18,7 +19,8 @@ namespace WebApp_SqlProject.Controllers
         {
             return View();
         }
-        [HttpPost]
+
+        [HttpPost,ActionName("Creation")]
         [ValidateAntiForgeryToken]
         public ActionResult Create(User model)
         {
@@ -32,6 +34,7 @@ namespace WebApp_SqlProject.Controllers
             return View(model);
         }
         
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) 
@@ -52,6 +55,8 @@ namespace WebApp_SqlProject.Controllers
 
             return View(model);
         }
+
+
         // GET: User/Edit
         public ActionResult Edit(int id)
         {
@@ -87,6 +92,36 @@ namespace WebApp_SqlProject.Controllers
             }
 
             return View(model); // If model state is not valid, return to the view
+        }
+
+
+        public ActionResult Access()
+        {
+            return View();
+        }
+
+        [HttpPost, ActionName("Access")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Access(User model)
+        {
+            var user = db.Users.FirstOrDefault(x => x.UserEmail == model.UserEmail && x.UserPassword == model.UserPassword);
+            if (ModelState.IsValid)
+            {
+                if (user != null)
+                {
+                    FormsAuthentication.SetAuthCookie(model.UserEmail, false);
+                    return RedirectToAction("Display","User");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Invalid username or password please try again";
+                    return View(model);
+                }
+            }
+               
+
+            return View(model);
+
         }
 
 
