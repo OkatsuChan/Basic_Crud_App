@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WebApp_SqlProject.Models.User>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Display Users</h2>
+
+<table class="table">
+    <tr>
+        <th scope="col">Employee ID</th>
+        <th scope="col">Employee Email</th>
+        <th scope="col">Employee Password</th>
+        <th scope="col">Date Created</th>
+        <th scope="col">Delete</th">
+        <th scope="col">Update</th">
+    </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td scope="row">@user.UserId</td>
+            <td scope="row">@user.UserEmail</td>
+            <td scope="row">@user.UserPassword</td>
+            <td scope="row">@user.DateCreated</td>
+            <td scope="row">
+                @using (Html.BeginForm("Delete", "User", new { id = user.UserId }, FormMethod.Post, new { onsubmit = $"return confirm('Are you sure you want to delete {user.UserEmail} this will be resulting on permanent deletion?');" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                }
+
+            </td>
+            <td scope="row">
+                @Html.ActionLink("Edit", "Edit", new { id = user.UserId }, new { @class = "btn btn-primary" })
+
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="container">
+    @Html.ActionLink("Create New Account", "Creation", "User", null, new { @class = "btn btn-info" })
+</div>
